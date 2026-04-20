@@ -17,4 +17,18 @@ class ProductViewSet(ModelViewSet):
     ordering_fields=['price']
     permission_classes=[IsAuthenticatedOrReadOnly]
 
- 
+    # def create(self, request, *args, **kwargs):
+    #     print("DATA RECEIVED:", request.data)
+    #     return super().create(request, *args, **kwargs)
+
+    def perform_create(self,serializer):
+        serializer.save(user=self.request.user)
+
+    def get_queryset(self):
+        if self.request.user.is_authenticated:
+            return Product.objects.filter(user=self.request.user)
+        else:
+            return Product.objects.all()
+
+
+    
