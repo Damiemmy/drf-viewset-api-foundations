@@ -39,13 +39,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
-
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
     'django_filters'
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -113,6 +114,9 @@ REST_FRAMEWORK={
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", 
+]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
