@@ -11,17 +11,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from datetime import timedelta
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-_qvhj6kf)$3a(3_i)hilz0fj-rm0r_^7d12%u9c$)4whn0gi(p'
+SECRET_KEY = 'django-insecure--st^ej$wqy4kcp-1mhw0#nlhvwvn+j!@z^t8um)z)$q@2$d)t1'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,11 +38,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    #my apps
     'api',
-    'corsheaders',
+    'useraccount',
+
+    #third party app
     'rest_framework',
     'rest_framework_simplejwt',
-    'django_filters'
+    'django_filters', 
+    'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -106,17 +112,21 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 REST_FRAMEWORK={
-    "DEFAULT_FILTER_BACKENDS":['django_filters.rest_framework.DjangoFilterBackend'],
     "DEFAULT_AUTHENTICATION_CLASSES":(
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    "DEFAULT_FILTER_BACKENDS":['django_filters.rest_framework.DjangoFilterBackend']
 }
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
-}
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000", 
 ]
+
+AUTH_USER_MODEL='useraccount.User'
+
+SIMPLE_JWT={
+    'TOKEN_ACCESS_LIFETIME':(timedelta(minutes=60))
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
