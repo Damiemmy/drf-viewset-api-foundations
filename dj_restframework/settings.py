@@ -124,8 +124,8 @@ CORS_ALLOWED_ORIGINS = [
 
 AUTH_USER_MODEL='useraccount.User'
 
-SIMPLE_JWT={
-    'TOKEN_ACCESS_LIFETIME':(timedelta(minutes=60))
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
 }
 
 # Internationalization

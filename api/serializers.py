@@ -5,7 +5,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model=Product
         fields="__all__"
-        read_only_fields=['user']\
+        read_only_fields=['user']
 
     def validate_price(self,value):
         if value<=0:
