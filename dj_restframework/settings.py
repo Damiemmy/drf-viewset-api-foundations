@@ -11,17 +11,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-from datetime import timedelta
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure--st^ej$wqy4kcp-1mhw0#nlhvwvn+j!@z^t8um)z)$q@2$d)t1'
+SECRET_KEY = 'django-insecure-)qd(-wu_noh(ua2nm^@d#s4^mmw07)n$#^b_)p2y&)4g*!u&-k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,21 +38,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    #my apps
+    #my app
     'api',
     'useraccount',
 
     #third party app
+
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt',
-    'django_filters', 
-    'corsheaders',
-
+    'django_filters',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -111,21 +109,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK={
-    "DEFAULT_AUTHENTICATION_CLASSES":(
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-    "DEFAULT_FILTER_BACKENDS":['django_filters.rest_framework.DjangoFilterBackend']
+    ],
+    'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend']
 }
-
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", 
-]
-
-AUTH_USER_MODEL='useraccount.User'
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
+SIMPLE_JWT={
+    "ACCESS_TOKEN_LIFETIME":timedelta(minutes=60)
 }
 
 # Internationalization
@@ -139,11 +130,16 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL='useraccount.User'
+
+
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

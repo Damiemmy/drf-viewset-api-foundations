@@ -4,17 +4,18 @@ from useraccount.models import User
 # Create your models here.
 class Category(models.Model):
     name=models.CharField(max_length=50)
-
+    
     def __str__(self):
         return self.name
+
 class Product(models.Model):
     name=models.CharField(max_length=50)
-    price=models.DecimalField(max_digits=10,decimal_places=2)
     user=models.ForeignKey(User,on_delete=models.CASCADE,related_name='products')
-    category=models.ForeignKey(Category,on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='img/product_image', blank=True,null=True)
+    category=models.ForeignKey(Category,on_delete=models.CASCADE,related_name='products')
+    price=models.DecimalField(max_digits=10,decimal_places=2)
+    image=models.ImageField(upload_to='images/productimages',blank=True,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     modified_at=models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.name} product"
+        return f"{self.name} Product"
