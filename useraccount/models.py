@@ -4,8 +4,9 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(AbstractUser):
     UserRole=(
-        ('user','User'),
-        ('host','Host'),
         ('admin','Admin'),
+        ('host','Host'),
+        ('user','User'),
+        
     )
     role=models.CharField(max_length=10,choices=UserRole,default='user')
