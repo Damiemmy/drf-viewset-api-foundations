@@ -23,7 +23,8 @@ class ProductSerializer(serializers.ModelSerializer):
                 user.is_staff or 
                 user.is_superuser
             ):
-                validated_data.pop('price')
+                # raise serializers.ValidationError('price cannot be changed after a booking has been made')
+                raise serializers.ValidationError('Price cannot be change after approval from admin')
 
         return super().update(instance, validated_data)
 

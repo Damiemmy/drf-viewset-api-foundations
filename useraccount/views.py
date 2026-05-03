@@ -15,5 +15,6 @@ class UserRoleViewSet(ViewSet):
     def become_host(self,request):
         user=request.user
         user.role='host'
+        user.is_host_approved = False
         user.save()
-        return Response({"message":"You are now a Host"})
+        return Response({"message": "Host request submitted, waiting for approval"})

@@ -69,10 +69,10 @@ class ProductViewSet(ModelViewSet):
     def get_permissions(self):
         if self.action=='create':
             return [IsAuthenticated(),IsHost()]
-        if self.action in ['update','destroy']:
+        elif self.action in ['update','destroy']:
             return [IsAuthenticated(),IsOwnerOrAdmin()]
         elif self.action == 'admin_only_action':
             return [IsAuthenticated(), IsAdmin()]
-        if self.action in ['list', 'retrieve']:
+        elif self.action in ['list', 'retrieve']:
             return [AllowAny()]
         return [AllowAny()]
