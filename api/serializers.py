@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product
+from .models import Product,Listing
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,6 +27,16 @@ class ProductSerializer(serializers.ModelSerializer):
                 raise serializers.ValidationError('Price cannot be change after approval from admin')
 
         return super().update(instance, validated_data)
+
+class ListingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Listing
+        fields="__all__"
+
+    def validate_price(self,value):
+        if value<=0:
+            raise serializers.ValidationError("price value must be greater than zero")
+        return value
 
             
 

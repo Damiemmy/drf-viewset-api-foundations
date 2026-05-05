@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
-from .serializers import ProductSerializer
-from .models import Product
+from .serializers import ProductSerializer,ListingSerializer
+from .models import Product,Listing
 from useraccount.permissions import IsAdmin,IsHost,IsOwnerOrAdmin
 from rest_framework.permissions import IsAuthenticated,AllowAny
 
@@ -76,3 +76,7 @@ class ProductViewSet(ModelViewSet):
         elif self.action in ['list', 'retrieve']:
             return [AllowAny()]
         return [AllowAny()]
+
+class ListingViewSet(ModelViewSet):
+    queryset=Listing.objects.all()
+    serializer_class=ListingSerializer
